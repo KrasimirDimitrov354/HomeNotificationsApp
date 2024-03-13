@@ -8,12 +8,10 @@ public static class EntityFieldValidation
         public const int UsernameMaxLength = 30;
         public const string UsernameLengthErrorMessage = "Username must be between 3 and 30 symbols long.";
         public const string UserNameExistsErrorMessage = "Username already exists!";
-    }
 
-    public static class Password
-    {
         public const int PasswordMinLength = 3;
         public const int PasswordMaxLength = 50;
+        public const string PasswordHashTypeName = "char(110)";
         public const string PasswordLengthErrorMessage = "Password must be between 3 and 50 symbols long.";
         public const string PasswordExistsErrorMessage = "Password must be different from the previous one.";
         public const string PasswordNotMatchingErrorMessage = "The password and confirmation password do not match!";

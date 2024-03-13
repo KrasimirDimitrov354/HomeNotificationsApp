@@ -4,15 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 using RoleConstants = Common.EntityFieldValidation.Role;
 
-public class UserRoles
+public class UserRole
 {
-    public UserRoles()
-    {
-        Id = Guid.NewGuid();
-    }
-
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     [Required]
     [MaxLength(RoleConstants.RoleMaxLength)]

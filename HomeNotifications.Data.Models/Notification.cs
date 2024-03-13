@@ -16,8 +16,8 @@ public class Notification
     public int TypeId { get; set; }
     public virtual NotificationType NotificationType { get; set; } = null!;
 
-    public int CreatorId { get; set; }
-    public virtual NotificationUser User { get; set; } = null!;
+    public Guid OwnerId { get; set; }
+    public virtual NotificationUser Owner { get; set; } = null!;
 
     //System columns
     public Guid Created_By_Id { get; set; }

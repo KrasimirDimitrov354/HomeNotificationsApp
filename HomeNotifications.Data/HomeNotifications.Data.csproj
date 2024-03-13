@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HomeNotifications.Common\HomeNotifications.Common.csproj" />
     <ProjectReference Include="..\HomeNotifications.Data.Models\HomeNotifications.Data.Models.csproj" />
   </ItemGroup>
 

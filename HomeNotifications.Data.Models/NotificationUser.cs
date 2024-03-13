@@ -1,6 +1,7 @@
 ﻿namespace HomeNotifications.Data.Models;
 
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 using UserConstants = Common.EntityFieldValidation.User;
 
@@ -20,12 +21,13 @@ public class NotificationUser
     public string Username { get; set; } = null!;
 
     [Required]
+    [Column(TypeName = UserConstants.PasswordHashTypeName)]
     public string PasswordHash { get; set; } = null!;
 
     public bool ChangePassword {  get; set; }
 
-    public Guid RoleId { get; set; }
-    public virtual UserRoles Role { get; set; } = null!;
+    public int RoleId { get; set; }
+    public virtual UserRole Role { get; set; } = null!;
 
     public virtual ICollection<Notification> Notifications { get; set; }
 
