@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HomeNotifications.Common\HomeNotifications.Common.csproj" />
+    <ProjectReference Include="..\HomeNotifications.Data.Models\HomeNotifications.Data.Models.csproj" />
+    <ProjectReference Include="..\HomeNotifications.Data\HomeNotifications.Data.csproj" />
+    <ProjectReference Include="..\HomeNotifications.Web.RazorModels\HomeNotifications.Web.Models.csproj" />
+  </ItemGroup>
+
+</Project>

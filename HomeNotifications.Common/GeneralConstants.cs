@@ -8,4 +8,9 @@ public static class GeneralConstants
 
     public const string AdminRoleName = "Admin";
     public const string UserRoleName = "User";
+
+    public const string UserCookieName = "HomeNotificationsUserCookie";
+    public const string SecurityKey = "This is a very secret key that you are not seeing here!!!";
+
+    public const string ApiSecuritySchemeDescription = "Standart authorization header using the JWT Bearer scheme \"bearer {token}\"";
 }

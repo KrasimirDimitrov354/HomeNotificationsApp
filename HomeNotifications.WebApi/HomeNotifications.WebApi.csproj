@@ -7,19 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\HomeNotifications.Data\HomeNotifications.Data.csproj" />
     <ProjectReference Include="..\HomeNotifications.Services\HomeNotifications.Services.Data.csproj" />
     <ProjectReference Include="..\HomeNotifications.Web.Infrastructure\HomeNotifications.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\HomeNotifications.Web.RazorModels\HomeNotifications.Web.Models.csproj" />
-    <ProjectReference Include="..\HomeNotifications.WebApi\HomeNotifications.WebApi.csproj" />
   </ItemGroup>
 
 </Project>

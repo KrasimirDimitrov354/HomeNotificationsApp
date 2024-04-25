@@ -1,0 +1,6 @@
+@HomeNotifications.WebApi_HostAddress = http://localhost:5118
+
+GET {{HomeNotifications.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

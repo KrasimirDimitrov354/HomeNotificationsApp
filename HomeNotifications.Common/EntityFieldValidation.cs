@@ -15,6 +15,9 @@ public static class EntityFieldValidation
         public const string PasswordLengthErrorMessage = "Password must be between 3 and 50 symbols long.";
         public const string PasswordExistsErrorMessage = "Password must be different from the previous one.";
         public const string PasswordNotMatchingErrorMessage = "The password and confirmation password do not match!";
+        
+        public const string ConfirmPasswordFieldDisplayName = "Confirm password";
+        public const string RoleFieldDisplayName = "Role";
     }
 
     public static class Role

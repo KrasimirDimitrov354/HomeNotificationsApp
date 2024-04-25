@@ -1,7 +1,9 @@
 ﻿namespace HomeNotifications.Web.Pages;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+[Authorize]
 public class PrivacyModel : PageModel
 {
     private readonly ILogger<PrivacyModel> _logger;

@@ -1,11 +1,14 @@
 namespace HomeNotifications.Web.Pages;
 
 using System.Diagnostics;
+
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 [IgnoreAntiforgeryToken]
+[AllowAnonymous]
 public class ErrorModel : PageModel
 {
     public string? RequestId { get; set; }
