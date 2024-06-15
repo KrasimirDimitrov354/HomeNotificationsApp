@@ -4,15 +4,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 public class IndexModel : PageModel
 {
-    private readonly ILogger<IndexModel> _logger;
-
-    public IndexModel(ILogger<IndexModel> logger)
+    public void OnGet(string tClass, string tContent)
     {
-        _logger = logger;
-    }
-
-    public void OnGet()
-    {
-
+        ViewData["toast-class"] = tClass;
+        ViewData["toast-content"] = tContent;
     }
 }

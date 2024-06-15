@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 using HomeNotifications.Data;
-using HomeNotifications.Data.Models;
 using HomeNotifications.Common;
+using HomeNotifications.Data.Models;
 using HomeNotifications.Web.Models.User;
 using HomeNotifications.Services.Data.Interfaces;
 

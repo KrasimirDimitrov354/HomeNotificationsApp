@@ -13,4 +13,8 @@ public static class GeneralConstants
     public const string SecurityKey = "This is a very secret key that you are not seeing here!!!";
 
     public const string ApiSecuritySchemeDescription = "Standart authorization header using the JWT Bearer scheme \"bearer {token}\"";
+
+    public const string ToastNotificationSuccessClass = "toast-success";
+    public const string ToastNotificationErrorClass = "toast-error";
+    public const string ToastNotificationWarningClass = "toast-warning";
 }

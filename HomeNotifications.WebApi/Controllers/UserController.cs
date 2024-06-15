@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using HomeNotifications.Web.Models.User;
 using HomeNotifications.Services.Data.Interfaces;
 
-using ErrorMessages = Common.ErrorMessages;
+using Messages = Common.Messages;
 using GeneralConstants = Common.GeneralConstants;
 
 [Route("api/[controller]/[action]")]
@@ -17,12 +17,15 @@ using GeneralConstants = Common.GeneralConstants;
 public class UserController : ControllerBase
 {
     private readonly IUserService userService;
+    private readonly IRoleService roleService;
     private readonly IHomeAuthenticationService authenticationService;
 
     public UserController(IUserService userService,
+        IRoleService roleService,
         IHomeAuthenticationService authenticationService)
     {
         this.userService = userService;
+        this.roleService = roleService;
         this.authenticationService = authenticationService;
     }
 
@@ -34,19 +37,43 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
+    public async Task CreateUser(UserCreateModel userDetails, string adminId)
+    {
+        bool usernameExists = await userService.GetUserByUsernameAsync(userDetails.Username) != string.Empty;
+        if (usernameExists)
+        {
+            throw new ArgumentException(Messages.User.UsernameAlreadyExistsError);
+        }
+
+        if (userDetails.Password != userDetails.ConfirmPassword)
+        {
+            throw new ArgumentException(Messages.User.PasswordMismatchError);
+        }
+
+        bool roleExists = await roleService.RoleExistsByIdAsync(userDetails.RoleId);
+        if (!roleExists)
+        {
+            throw new ArgumentException(Messages.Role.InvalidIdError);
+        }
+
+        await userService.CreateUserAsync(userDetails, adminId);
+    }
+
+    [HttpPost]
     [AllowAnonymous]
     public async Task<ClaimsPrincipal> LoginWebUser(UserLoginModel user)
     {
         string userId = await userService.GetUserByUsernameAsync(user.Username);
         if (userId == string.Empty)
         {
-            throw new ArgumentException(ErrorMessages.User.InvalidCredentials);
+            throw new ArgumentException(Messages.User.InvalidCredentialsError);
         }
 
         bool credentialsAreValid = await userService.ValidateCredentialsAsync(user.Username, user.Password);
         if (!credentialsAreValid)
         {
-            throw new ArgumentException(ErrorMessages.User.InvalidCredentials);
+            throw new ArgumentException(Messages.User.InvalidCredentialsError);
         }
 
         try
@@ -58,7 +85,7 @@ public class UserController : ControllerBase
         }
         catch (Exception)
         {
-            throw new InvalidOperationException(ErrorMessages.Unexpected);
+            throw new InvalidOperationException(Messages.UnexpectedError);
         }
     }
 
@@ -69,13 +96,13 @@ public class UserController : ControllerBase
         string userId = await userService.GetUserByUsernameAsync(user.Username);
         if (userId == string.Empty)
         {
-            return BadRequest();
+            return BadRequest(Messages.User.InvalidCredentialsError);
         }
 
         bool credentialsAreValid = await userService.ValidateCredentialsAsync(user.Username, user.Password);
         if (!credentialsAreValid)
         {
-            return Unauthorized();
+            return Unauthorized(Messages.User.InvalidCredentialsError);
         }
 
         try
@@ -87,7 +114,7 @@ public class UserController : ControllerBase
         }
         catch (Exception)
         {
-            return BadRequest(ErrorMessages.Unexpected);
+            return BadRequest(Messages.UnexpectedError);
         }
     }
 }

@@ -1,0 +1,39 @@
+﻿@page
+@model HomeNotifications.Web.Pages.Account.CreateModel
+
+<div class="row input-field" id="user-form">
+    <form method="post">
+        <div class="form-group">
+            <label asp-for=UserCreateModel.Username>Username</label>
+            <input asp-for="UserCreateModel.Username" class="form-control">
+            <span asp-validation-for="UserCreateModel.Username" class="small text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for=UserCreateModel.Password>Password</label>
+            <input type="password" asp-for="UserCreateModel.Password" class="form-control">
+            <span asp-validation-for="UserCreateModel.Password" class="small text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for=UserCreateModel.ConfirmPassword>Confirm Password</label>
+            <input type="password" asp-for="UserCreateModel.ConfirmPassword" class="form-control">
+            <span asp-validation-for="UserCreateModel.ConfirmPassword" class="small text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for=UserCreateModel.RoleId>Role</label>
+            <select asp-for="UserCreateModel.RoleId" class="form-control">
+                @foreach (var role in Model.UserCreateModel.Roles)
+                {
+                    <option value="@role.Id">@role.Name</option>
+                }
+            </select>
+            <span asp-validation-for="UserCreateModel.RoleId" class="small text-danger"></span>
+        </div>
+        <div class="text-center">
+            <input class="btn btn-primary mt-3" type="submit" value="Create" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

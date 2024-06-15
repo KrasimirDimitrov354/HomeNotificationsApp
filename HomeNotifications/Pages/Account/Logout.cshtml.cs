@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Authentication;
 
 public class LogoutModel : PageModel
 {
-    public async Task<IActionResult> OnPost(string returnUrl)
+    public async Task<IActionResult> OnPost()
     {
         await HttpContext.SignOutAsync();
 
-        return LocalRedirect(returnUrl);
+        return RedirectToPage("/Index");
     }
 }

@@ -8,7 +8,8 @@
     <title>@ViewData["Title"] - NewsAndNotificationsApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/NewsAndNotificationsApp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ToastStyling.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/InputFieldStyling.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -27,6 +28,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
+                        @if (User.IsLoggedIn() && User.IsAdmin())
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Create">Create new user</a>
+                            </li>
+                        }
                     </ul>
                     <ul class="navbar-nav">
                         @if (User.IsLoggedIn())
@@ -54,6 +61,12 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+
+            @if (ViewData["toast-class"] != null)
+            {
+                <input type="hidden" id="toast-class" value=@ViewData["toast-class"] />
+                <input type="hidden" id="toast-content" value="@ViewData["toast-content"]" />
+            }
         </main>
     </div>
 
@@ -66,6 +79,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/js/ToastScript.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
