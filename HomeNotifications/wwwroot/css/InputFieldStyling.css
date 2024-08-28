@@ -3,4 +3,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+    cursor: default;
+    z-index: 2;
 }

@@ -33,8 +33,7 @@ public static class EntityFieldValidation
         public const int ContentMinLength = 3;
         public const int ContentMaxLength = 100;
         public const string NotificationLengthErrorMessage = "Notification content must be between 3 and 100 symbols long.";
-        public const string StartingDateTooEarlyErrorMessage = "Starting date cannot be earlier than today!";
-        public const string StartingDateEndDateMismatchErrorMessage = "Ending date cannot be earlier than starting date!";
+        public const string NotificationTypeDisplayName = "Type";
     }
 
     public static class NotificationType

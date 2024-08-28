@@ -11,8 +11,13 @@
     <link rel="stylesheet" href="~/css/InputFieldStyling.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/OverlayFormStyling.css" asp-append-version="true" />
 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
     <script src="~/js/ToastScript.js"></script>
     <script src="~/js/OverlayScript.js"></script>
+    <script src="~/js/NotificationFormScript.js"></script>
 </head>
 <body>
     <header>
@@ -60,10 +65,6 @@
             }
         </main>
     </div>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
