@@ -17,4 +17,6 @@ public static class GeneralConstants
     public const string ToastNotificationSuccessClass = "toast-success";
     public const string ToastNotificationErrorClass = "toast-error";
     public const string ToastNotificationWarningClass = "toast-warning";
+
+    public const string UnexpectedErrorMessage = "Unexpected error occured, please contact administrator.";
 }

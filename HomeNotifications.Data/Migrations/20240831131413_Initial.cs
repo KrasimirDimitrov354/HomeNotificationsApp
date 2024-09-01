@@ -81,7 +81,6 @@ namespace HomeNotifications.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Content = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     TypeId = table.Column<int>(type: "int", nullable: false),
-                    NotificationTypeId = table.Column<int>(type: "int", nullable: false),
                     OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Created_By_Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Created_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -92,11 +91,11 @@ namespace HomeNotifications.Data.Migrations
                 {
                     table.PrimaryKey("PK_Notifications", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Notifications_NotificationTypes_NotificationTypeId",
-                        column: x => x.NotificationTypeId,
+                        name: "FK_Notifications_NotificationTypes_TypeId",
+                        column: x => x.TypeId,
                         principalTable: "NotificationTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Notifications_Users_OwnerId",
                         column: x => x.OwnerId,
@@ -110,9 +109,9 @@ namespace HomeNotifications.Data.Migrations
                 columns: new[] { "Id", "Color", "Created_By_Id", "Created_Date", "Modified_By_Id", "Modified_Date", "Name" },
                 values: new object[,]
                 {
-                    { 1, "#FF0000", new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"), new DateTime(2024, 3, 13, 19, 13, 54, 111, DateTimeKind.Local).AddTicks(1132), null, null, "High Priority" },
-                    { 2, "#FFFF00", new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"), new DateTime(2024, 3, 13, 19, 13, 54, 111, DateTimeKind.Local).AddTicks(1188), null, null, "Medium Priority" },
-                    { 3, "#0080FF", new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"), new DateTime(2024, 3, 13, 19, 13, 54, 111, DateTimeKind.Local).AddTicks(1192), null, null, "Low Priority" }
+                    { 1, "#FF0000", new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"), new DateTime(2024, 8, 31, 16, 14, 13, 639, DateTimeKind.Local).AddTicks(2028), null, null, "High Priority" },
+                    { 2, "#FFFF00", new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"), new DateTime(2024, 8, 31, 16, 14, 13, 639, DateTimeKind.Local).AddTicks(2081), null, null, "Medium Priority" },
+                    { 3, "#0080FF", new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"), new DateTime(2024, 8, 31, 16, 14, 13, 639, DateTimeKind.Local).AddTicks(2085), null, null, "Low Priority" }
                 });
 
             migrationBuilder.InsertData(
@@ -120,24 +119,24 @@ namespace HomeNotifications.Data.Migrations
                 columns: new[] { "Id", "Created_By_Id", "Created_Date", "Modified_By_Id", "Modified_Date", "Name" },
                 values: new object[,]
                 {
-                    { 1, new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"), new DateTime(2024, 3, 13, 19, 13, 54, 116, DateTimeKind.Local).AddTicks(803), null, null, "Admin" },
-                    { 2, new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"), new DateTime(2024, 3, 13, 19, 13, 54, 116, DateTimeKind.Local).AddTicks(820), null, null, "User" }
+                    { 1, new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"), new DateTime(2024, 8, 31, 16, 14, 13, 644, DateTimeKind.Local).AddTicks(120), null, null, "Admin" },
+                    { 2, new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"), new DateTime(2024, 8, 31, 16, 14, 13, 644, DateTimeKind.Local).AddTicks(139), null, null, "User" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "ChangePassword", "Created_By_Id", "Created_Date", "Modified_By_Id", "Modified_Date", "PasswordHash", "RoleId", "Username" },
-                values: new object[] { new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"), false, new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"), new DateTime(2024, 3, 13, 19, 13, 54, 115, DateTimeKind.Local).AddTicks(9906), null, null, "392AF712F5350B0C9B9E5D4F2886A908375E2E2B55D8847A45F321ED935AF64F:B9AC4CC6C054102D5C2342BE211EF015:50000:SHA256", 1, "Admin" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Notifications_NotificationTypeId",
-                table: "Notifications",
-                column: "NotificationTypeId");
+                values: new object[] { new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"), false, new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"), new DateTime(2024, 8, 31, 16, 14, 13, 643, DateTimeKind.Local).AddTicks(9219), null, null, "90D83AD45E50E7889B0DFCC9383E69302C98193888C5353BAEF60C6DAEBF33EF:1E3D446AC1BF84E2263878D475AA0A73:50000:SHA256", 1, "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notifications_OwnerId",
                 table: "Notifications",
                 column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notifications_TypeId",
+                table: "Notifications",
+                column: "TypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleId",

@@ -1,13 +1,13 @@
 ﻿$(document).on("click", "#overlay-background", function (event) {
     if (event.target.id == "overlay-background") {
-        off();
+        overlayOff();
     }
 });
 
-function off() {
+function overlayOff() {
     document.getElementById("overlay-background").style.display = "none";
 }
 
-function on() {
+function overlayOn() {
     document.getElementById("overlay-background").style.display = "block";
 }

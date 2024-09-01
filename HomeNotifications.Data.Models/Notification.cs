@@ -14,7 +14,7 @@ public class Notification
     public string Content { get; set; } = null!;
 
     public int TypeId { get; set; }
-    public virtual NotificationType NotificationType { get; set; } = null!;
+    public virtual NotificationType Type { get; set; } = null!;
 
     public Guid OwnerId { get; set; }
     public virtual NotificationUser Owner { get; set; } = null!;

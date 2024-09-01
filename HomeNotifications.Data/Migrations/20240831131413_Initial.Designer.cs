@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeNotifications.Data.Migrations
 {
     [DbContext(typeof(HomeNotificationsDbContext))]
-    [Migration("20240313171354_Initial")]
+    [Migration("20240831131413_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -50,9 +50,6 @@ namespace HomeNotifications.Data.Migrations
                     b.Property<DateTime?>("Modified_Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("NotificationTypeId")
-                        .HasColumnType("int");
-
                     b.Property<Guid>("OwnerId")
                         .HasColumnType("uniqueidentifier");
 
@@ -61,9 +58,9 @@ namespace HomeNotifications.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NotificationTypeId");
-
                     b.HasIndex("OwnerId");
+
+                    b.HasIndex("TypeId");
 
                     b.ToTable("Notifications");
                 });
@@ -107,7 +104,7 @@ namespace HomeNotifications.Data.Migrations
                             Id = 1,
                             Color = "#FF0000",
                             Created_By_Id = new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"),
-                            Created_Date = new DateTime(2024, 3, 13, 19, 13, 54, 111, DateTimeKind.Local).AddTicks(1132),
+                            Created_Date = new DateTime(2024, 8, 31, 16, 14, 13, 639, DateTimeKind.Local).AddTicks(2028),
                             Name = "High Priority"
                         },
                         new
@@ -115,7 +112,7 @@ namespace HomeNotifications.Data.Migrations
                             Id = 2,
                             Color = "#FFFF00",
                             Created_By_Id = new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"),
-                            Created_Date = new DateTime(2024, 3, 13, 19, 13, 54, 111, DateTimeKind.Local).AddTicks(1188),
+                            Created_Date = new DateTime(2024, 8, 31, 16, 14, 13, 639, DateTimeKind.Local).AddTicks(2081),
                             Name = "Medium Priority"
                         },
                         new
@@ -123,7 +120,7 @@ namespace HomeNotifications.Data.Migrations
                             Id = 3,
                             Color = "#0080FF",
                             Created_By_Id = new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"),
-                            Created_Date = new DateTime(2024, 3, 13, 19, 13, 54, 111, DateTimeKind.Local).AddTicks(1192),
+                            Created_Date = new DateTime(2024, 8, 31, 16, 14, 13, 639, DateTimeKind.Local).AddTicks(2085),
                             Name = "Low Priority"
                         });
                 });
@@ -173,8 +170,8 @@ namespace HomeNotifications.Data.Migrations
                             Id = new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"),
                             ChangePassword = false,
                             Created_By_Id = new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"),
-                            Created_Date = new DateTime(2024, 3, 13, 19, 13, 54, 115, DateTimeKind.Local).AddTicks(9906),
-                            PasswordHash = "392AF712F5350B0C9B9E5D4F2886A908375E2E2B55D8847A45F321ED935AF64F:B9AC4CC6C054102D5C2342BE211EF015:50000:SHA256",
+                            Created_Date = new DateTime(2024, 8, 31, 16, 14, 13, 643, DateTimeKind.Local).AddTicks(9219),
+                            PasswordHash = "90D83AD45E50E7889B0DFCC9383E69302C98193888C5353BAEF60C6DAEBF33EF:1E3D446AC1BF84E2263878D475AA0A73:50000:SHA256",
                             RoleId = 1,
                             Username = "Admin"
                         });
@@ -214,35 +211,35 @@ namespace HomeNotifications.Data.Migrations
                         {
                             Id = 1,
                             Created_By_Id = new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"),
-                            Created_Date = new DateTime(2024, 3, 13, 19, 13, 54, 116, DateTimeKind.Local).AddTicks(803),
+                            Created_Date = new DateTime(2024, 8, 31, 16, 14, 13, 644, DateTimeKind.Local).AddTicks(120),
                             Name = "Admin"
                         },
                         new
                         {
                             Id = 2,
                             Created_By_Id = new Guid("c85a27d4-d7c9-4293-9f18-93c836896b50"),
-                            Created_Date = new DateTime(2024, 3, 13, 19, 13, 54, 116, DateTimeKind.Local).AddTicks(820),
+                            Created_Date = new DateTime(2024, 8, 31, 16, 14, 13, 644, DateTimeKind.Local).AddTicks(139),
                             Name = "User"
                         });
                 });
 
             modelBuilder.Entity("HomeNotifications.Data.Models.Notification", b =>
                 {
-                    b.HasOne("HomeNotifications.Data.Models.NotificationType", "NotificationType")
-                        .WithMany()
-                        .HasForeignKey("NotificationTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HomeNotifications.Data.Models.NotificationUser", "Owner")
                         .WithMany("Notifications")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("NotificationType");
+                    b.HasOne("HomeNotifications.Data.Models.NotificationType", "Type")
+                        .WithMany("Notifications")
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Owner");
+
+                    b.Navigation("Type");
                 });
 
             modelBuilder.Entity("HomeNotifications.Data.Models.NotificationUser", b =>
@@ -254,6 +251,11 @@ namespace HomeNotifications.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("HomeNotifications.Data.Models.NotificationType", b =>
+                {
+                    b.Navigation("Notifications");
                 });
 
             modelBuilder.Entity("HomeNotifications.Data.Models.NotificationUser", b =>

@@ -9,9 +9,9 @@ using HomeNotifications.Data.Models;
 public class HomeNotificationsDbContext : DbContext
 {
     public HomeNotificationsDbContext(DbContextOptions<HomeNotificationsDbContext> options)
-        :base(options)
+        : base(options)
     {
-        
+
     }
 
     public DbSet<NotificationUser> Users { get; set; } = null!;

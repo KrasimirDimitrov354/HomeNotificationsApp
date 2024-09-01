@@ -1,7 +1,7 @@
 ﻿@using HomeNotifications.Web.Models.Notification
 @model NotificationFormModel
 
-<form method="post">
+<form>
     <div class="form-group">
         <label asp-for=Content>Content</label>
         <input asp-for="Content" class="form-control">
@@ -18,7 +18,7 @@
         <span asp-validation-for="TypeId" class="small text-danger"></span>
     </div>
     <div class="text-center">
-        <input class="btn btn-primary mt-3" type="submit" value="Create" />
+        <input id="notification-submit" class="btn btn-primary mt-3" type="button" value="Create" onclick="postNotificationForm()" />
     </div>
 </form>
 

@@ -43,5 +43,6 @@ public static class EntityFieldValidation
         public const string TypeTypeName = "char(7)";
         public const string TypeNameLengthErrorMessage = "The name of the notification type must be between 3 and 30 symbols long.";
         public const string TypeNameAlreadyExists = "The notification type already exists!";
+        public const string InvalidNotificationTypeId = "The ID of the selected notification type does not exist in the database!";
     }
 }

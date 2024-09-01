@@ -7,6 +7,11 @@ using TypeConstants = Common.EntityFieldValidation.NotificationType;
 
 public class NotificationType
 {
+    public NotificationType()
+    {
+        Notifications = new HashSet<Notification>();
+    }
+
     [Key]
     public int Id { get; set; }
 
@@ -17,6 +22,8 @@ public class NotificationType
     [Required]
     [Column(TypeName = TypeConstants.TypeTypeName)]
     public string Color { get; set; } = null!;
+
+    public virtual ICollection<Notification> Notifications { get; set; }
 
     //System columns
     public Guid Created_By_Id { get; set; }
