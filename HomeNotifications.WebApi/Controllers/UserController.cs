@@ -117,4 +117,21 @@ public class UserController : ControllerBase
             return BadRequest(Messages.UnexpectedError);
         }
     }
+
+    [HttpPost]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetTokenForLocalStorage(string userId)
+    {
+        try
+        {
+            IEnumerable<Claim> claims = await authenticationService.GetClaims(userId);
+            string token = authenticationService.GetToken(claims, GeneralConstants.SecurityKey);
+
+            return Ok(token);
+        }
+        catch (Exception)
+        {
+            return BadRequest(Messages.UnexpectedError);
+        }
+    }
 }

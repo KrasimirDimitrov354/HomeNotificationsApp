@@ -5,4 +5,6 @@ using HomeNotifications.Web.Models.Notification;
 public interface INotificationService
 {
     Task CreateNotificationAsync(NotificationFormModel notificationFormModel, string userId);
+
+    Task<ICollection<NotificationPreviewModel>> GetLatestNotificationsAsync();
 }

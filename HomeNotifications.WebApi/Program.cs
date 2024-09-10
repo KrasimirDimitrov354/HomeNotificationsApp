@@ -22,6 +22,17 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowRequestsToMyAPI", policy => {
+                policy
+                    .WithOrigins("https://localhost:7265")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+                });
+        });
+
         builder.Services.AddApplicationSwaggerGen();
         builder.Services.AddApplicationJWTAuthentication();
 
@@ -34,6 +45,7 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+        app.UseCors("AllowRequestsToMyAPI");
 
         app.UseAuthentication();
         app.UseAuthorization();

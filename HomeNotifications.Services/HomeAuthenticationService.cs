@@ -25,8 +25,7 @@ public class HomeAuthenticationService : IHomeAuthenticationService
     {
         NotificationUser user = await dbContext.Users
             .Include(u => u.Role)
-            .FirstAsync(u => u.Id.ToString()
-            .ToLower() == userId.ToLower());
+            .FirstAsync(u => u.Id.ToString().ToLower() == userId.ToLower());
 
         return new HashSet<Claim>()
         {

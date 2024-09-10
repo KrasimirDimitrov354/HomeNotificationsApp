@@ -26,7 +26,7 @@ public class NotificationController : ControllerBase
     }
 
     [HttpPost]
-    public async Task CreateNotificationAsync(NotificationFormModel notificationDetails, string userId)
+    public async Task CreateNotification(NotificationFormModel notificationDetails, string userId)
     {
         try
         {
@@ -47,6 +47,21 @@ public class NotificationController : ControllerBase
         catch (Exception)
         {
             throw new ApplicationException(GeneralConstants.UnexpectedErrorMessage);
+        }
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetLatestNotifications()
+    {
+        try
+        {
+            ICollection<NotificationPreviewModel> latestNotifications = await notificationService.GetLatestNotificationsAsync();
+
+            return Ok(latestNotifications);
+        }
+        catch (Exception)
+        {
+            return BadRequest(GeneralConstants.UnexpectedErrorMessage);
         }
     }
 }

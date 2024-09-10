@@ -14,12 +14,15 @@ public class IndexModel : PageModel
 {
     private readonly INotificationTypeService notificationTypeService;
     private readonly NotificationController notificationController;
+    private readonly UserController userController;
 
     public IndexModel(INotificationTypeService notificationTypeService,
-        NotificationController notificationController)
+        NotificationController notificationController,
+        UserController userController)
     {
         this.notificationTypeService = notificationTypeService;
         this.notificationController = notificationController;
+        this.userController = userController;
 
         NotificationFormModel = new NotificationFormModel();
     }
@@ -43,6 +46,13 @@ public class IndexModel : PageModel
     public async Task OnPostFormPartial()
     {
         string userId = User.GetId()!;
-        await notificationController.CreateNotificationAsync(NotificationFormModel, userId);
+        await notificationController.CreateNotification(NotificationFormModel, userId);
+    }
+
+    public async Task<IActionResult> OnGetToken()
+    {
+        string userId = User.GetId()!;
+
+        return await userController.GetTokenForLocalStorage(userId);
     }
 }
